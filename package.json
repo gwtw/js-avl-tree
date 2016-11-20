@@ -1,6 +1,6 @@
 {
   "name": "@tyriar/avl-tree",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An implementation of the AVL tree data structure",
   "scripts": {
     "doc": "documentation-readme -s \"API\"",
