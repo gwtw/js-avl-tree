@@ -8,6 +8,7 @@
 /**
  * Creates a new AVL Tree node.
  *
+ * @private
  * @param {Object} key The key of the new node.
  */
 var Node = function (key) {

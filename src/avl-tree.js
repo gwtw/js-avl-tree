@@ -9,6 +9,8 @@ var Node = require('./node');
 
 /**
  * Represents how balanced a node's left and right children are.
+ *
+ * @private
  */
 var BalanceState = {
   UNBALANCED_RIGHT: 1,
@@ -63,6 +65,7 @@ AvlTree.prototype.insert = function (key) {
 /**
  * Inserts a new node with a specific key into the tree.
  *
+ * @private
  * @param {Object} key The key being inserted.
  * @param {Node} root The root of the tree to insert in.
  * @return {Node} The new tree root.
@@ -125,6 +128,7 @@ AvlTree.prototype.delete = function (key) {
 /**
  * Deletes a node with a specific key from the tree.
  *
+ * @private
  * @param {Object} key The key being deleted.
  * @param {Node} root The root of the tree to delete from.
  * @return {Node} The new tree root.
@@ -212,6 +216,7 @@ AvlTree.prototype.contains = function (key) {
 /**
  * Gets whether a node with a specific key is within the tree.
  *
+ * @private
  * @param {Object} key The key being searched for.
  * @param {Node} root The root of the tree to search in.
  * @return {boolean} Whether a node with the key exists.
@@ -244,6 +249,7 @@ AvlTree.prototype.findMinimum = function () {
 /**
  * Gets the minimum value node, rooted in a particular node.
  *
+ * @private
  * @param {Node} root The node to search.
  * @return {Node} The node with the minimum key in the tree.
  */
@@ -265,6 +271,7 @@ AvlTree.prototype.findMaximum = function () {
 /**
  * Gets the maximum value node, rooted in a particular node.
  *
+ * @private
  * @param {Node} root The node to search.
  * @return {Node} The node with the maximum key in the tree.
  */
@@ -294,6 +301,7 @@ AvlTree.prototype.isEmpty = function () {
  * Gets the balance state of a node, indicating whether the left or right
  * sub-trees are unbalanced.
  *
+ * @private
  * @param {Node} node The node to get the difference from.
  * @return {BalanceState} The BalanceState of the node.
  */
