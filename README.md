@@ -7,6 +7,17 @@ A JavaScript implementation of the [AVL tree](http://www.growingwiththeweb.com/d
 
 ![](http://www.growingwiththeweb.com/images/data-structures/avl-tree/avl-tree.svg)
 
+## Features
+
+- 100% test coverage
+- Supports all common tree operations
+
+## Install
+
+```bash
+npm install --save @tyriar/avl-tree
+```
+
 ## Operation time complexity
 
 | Operation   | Complexity |
