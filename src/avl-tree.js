@@ -19,7 +19,7 @@ var BalanceState = {
 };
 
 var AvlTree = function (customCompare) {
-  this._root = undefined;
+  this._root = null;
   this._size = 0;
 
   if (customCompare) {
@@ -35,7 +35,7 @@ var AvlTree = function (customCompare) {
  * @param {Object} b The second key to compare.
  * @return {number} -1, 0 or 1 if a < b, a == b or a > b respectively.
  */
-AvlTree.prototype.compare = function (a, b) {
+AvlTree.prototype._compare = function (a, b) {
   if (a.key > b.key) {
     return 1;
   }
@@ -51,7 +51,7 @@ AvlTree.prototype.compare = function (a, b) {
  * @param {Object} key The key being inserted.
  */
 AvlTree.prototype.insert = function (key) {
-  this.root = this._insert(key, this._root);
+  this._root = this._insert(key, this._root);
   this._size++;
 };
 
@@ -64,7 +64,7 @@ AvlTree.prototype.insert = function (key) {
  */
 AvlTree.prototype._insert = function (key, root) {
   // Perform regular BST insertion
-  if (typeof root === 'undefined') {
+  if (root === null) {
     return new Node(key);
   }
 
@@ -113,7 +113,7 @@ AvlTree.prototype._insert = function (key, root) {
  * @param {Object} key The key being deleted.
  */
 AvlTree.prototype.delete = function (key) {
-  this.root = this._delete(key, this._root);
+  this._root = this._delete(key, this._root);
   this._size--;
 };
 
@@ -126,7 +126,7 @@ AvlTree.prototype.delete = function (key) {
  */
 AvlTree.prototype._delete = function (key, root) {
   // Perform regular BST deletion
-  if (typeof root === 'undefined') {
+  if (root === null) {
     this._size++;
     return root;
   }
@@ -140,7 +140,7 @@ AvlTree.prototype._delete = function (key, root) {
   } else {
     // root is the node to be deleted
     if (!root.left && !root.right) {
-      root = undefined;
+      root = null;
     } else if (!root.leftExists() && root.rightExists()) {
       root = root.getRight();
     } else if (root.leftExists() && !root.rightExists()) {
@@ -153,7 +153,7 @@ AvlTree.prototype._delete = function (key, root) {
     }
   }
 
-  if (typeof root === 'undefined') {
+  if (root === null) {
     return root;
   }
 
@@ -198,7 +198,7 @@ AvlTree.prototype._delete = function (key, root) {
  * @return {boolean} Whether a node with the key exists.
  */
 AvlTree.prototype.contains = function (key) {
-  if (typeof this._root === 'undefined') {
+  if (this._root === null) {
     return false;
   }
 
@@ -280,7 +280,6 @@ AvlTree.prototype.size = function () {
   return this._size;
 };
 
-// TODO: Should this be supported?
 AvlTree.prototype.isEmpty = function () {
   return this._size === 0;
 };
@@ -293,7 +292,7 @@ AvlTree.prototype.isEmpty = function () {
  * @return {BalanceState} The BalanceState of the node.
  */
 function getBalanceState(node) {
-  if (typeof node === 'undefined') {
+  if (node === null) {
     return BalanceState.BALANCED;
   }
   var heightDifference = node.getLeftHeight() - node.getRightHeight();

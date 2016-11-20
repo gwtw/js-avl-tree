@@ -1,7 +1,7 @@
 import test from 'ava';
 import Tree from '../';
 
-test('should return the size of the heap', function (t) {
+test('should return the size of the tree', function (t) {
   var tree = new Tree();
   t.is(tree.size(), 0);
   tree.insert(1);
