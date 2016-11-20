@@ -141,13 +141,13 @@ AvlTree.prototype._delete = function (key, root) {
     // root is the node to be deleted
     if (!root.left && !root.right) {
       root = null;
-    } else if (!root.leftExists() && root.rightExists()) {
-      root = root.getRight();
-    } else if (root.leftExists() && !root.rightExists()) {
-      root = root.getLeft();
+    } else if (!root.left && root.right) {
+      root = root.right;
+    } else if (root.left && !root.right) {
+      root = root.left;
     } else {
       // Node has 2 children, get the in-order successor
-      var inOrderSuccessor = this._minValueNode(root.right);
+      var inOrderSuccessor = minValueNode(root.right);
       root.key = inOrderSuccessor.key;
       root.right = this._delete(inOrderSuccessor.key, root.right);
     }
@@ -174,15 +174,14 @@ AvlTree.prototype._delete = function (key, root) {
     }
   }
 
-  // Right right case
   if (balanceState === BalanceState.UNBALANCED_RIGHT) {
-    // TODO: Should this be getBalanceState(root.right)?
-    if (getBalanceState(root.left) === BalanceState.BALANCED ||
-        getBalanceState(root.left) === BalanceState.SLIGHTLY_UNBALANCED_RIGHT) {
+    // Right right case
+    if (getBalanceState(root.right) === BalanceState.BALANCED ||
+        getBalanceState(root.right) === BalanceState.SLIGHTLY_UNBALANCED_RIGHT) {
       return root.rotateLeft();
     }
     // Right left case
-    if (getBalanceState(root.left) === BalanceState.SLIGHTLY_UNBALANCED_LEFT) {
+    if (getBalanceState(root.right) === BalanceState.SLIGHTLY_UNBALANCED_LEFT) {
       root.right = root.right.rotateRight();
       return root.rotateLeft();
     }
