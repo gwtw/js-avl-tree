@@ -287,9 +287,6 @@ AvlTree.prototype.isEmpty = function () {
  * @return {BalanceState} The BalanceState of the node.
  */
 function getBalanceState(node) {
-  if (node === null) {
-    return BalanceState.BALANCED;
-  }
   var heightDifference = node.leftHeight() - node.rightHeight();
   switch (heightDifference) {
     case -2: return BalanceState.UNBALANCED_RIGHT;
