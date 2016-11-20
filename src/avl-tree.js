@@ -19,11 +19,11 @@ var BalanceState = {
 };
 
 var AvlTree = function (customCompare) {
-  this.root = undefined;
-  this.size = 0;
+  this._root = undefined;
+  this._size = 0;
 
   if (customCompare) {
-    this.compare = customCompare;
+    this._compare = customCompare;
   }
 };
 
@@ -51,8 +51,8 @@ AvlTree.prototype.compare = function (a, b) {
  * @param {Object} key The key being inserted.
  */
 AvlTree.prototype.insert = function (key) {
-  this.root = this._insert(key, this.root);
-  this.size++;
+  this.root = this._insert(key, this._root);
+  this._size++;
 };
 
 /**
@@ -68,13 +68,13 @@ AvlTree.prototype._insert = function (key, root) {
     return new Node(key);
   }
 
-  if (this.compare({key: key}, root) < 0) {
+  if (this._compare({key: key}, root) < 0) {
     root.left = this.insert(key, root.left);
-  } else if (this.compare({key: key}, root) > 0) {
+  } else if (this._compare({key: key}, root) > 0) {
     root.right = this._insert(key, root.right);
   } else {
     // It's a duplicate so insertion failed, decrement size to make up for it
-    this.size--;
+    this._size--;
     return root;
   }
 
@@ -83,7 +83,7 @@ AvlTree.prototype._insert = function (key, root) {
   var balanceState = getBalanceState(root);
 
   if (balanceState === BalanceState.UNBALANCED_LEFT) {
-    if (this.compare({key: key}, root.left) < 0) {
+    if (this._compare({key: key}, root.left) < 0) {
       // Left left case
       root = root.rightRotate();
     } else {
@@ -94,7 +94,7 @@ AvlTree.prototype._insert = function (key, root) {
   }
 
   if (balanceState === BalanceState.UNBALANCED_RIGHT) {
-    if (this.compare({key: key}, root.right) > 0) {
+    if (this._compare({key: key}, root.right) > 0) {
       // Right right case
       root = root.leftRotate();
     } else {
@@ -113,8 +113,8 @@ AvlTree.prototype._insert = function (key, root) {
  * @param {Object} key The key being deleted.
  */
 AvlTree.prototype.delete = function (key) {
-  this.root = this._delete(key, this.root);
-  this.size--;
+  this.root = this._delete(key, this._root);
+  this._size--;
 };
 
 /**
@@ -127,14 +127,14 @@ AvlTree.prototype.delete = function (key) {
 AvlTree.prototype._delete = function (key, root) {
   // Perform regular BST deletion
   if (typeof root === 'undefined') {
-    this.size++;
+    this._size++;
     return root;
   }
 
-  if (this.compare({key: key}, root) < 0) {
+  if (this._compare({key: key}, root) < 0) {
     // The key to be deleted is in the left sub-tree
     root.left = this._delete(key, root.left);
-  } else if (this.compare({key: key}, root) > 0) {
+  } else if (this._compare({key: key}, root) > 0) {
     // The key to be deleted is in the right sub-tree
     root.right = this._delete(key, root.right);
   } else {
@@ -198,11 +198,11 @@ AvlTree.prototype._delete = function (key, root) {
  * @return {boolean} Whether a node with the key exists.
  */
 AvlTree.prototype.contains = function (key) {
-  if (typeof this.root === 'undefined') {
+  if (typeof this._root === 'undefined') {
     return false;
   }
 
-  return this._contains(key, this.root);
+  return this._contains(key, this._root);
 };
 
 /**
@@ -217,14 +217,14 @@ AvlTree.prototype._contains = function (key, root) {
     return true;
   }
 
-  if (this.compare({key: key}, root) < 0) {
+  if (this._compare({key: key}, root) < 0) {
     if (!root.left) {
       return false;
     }
     return this._contains(key, root.left);
   }
 
-  if (this.compare({key: key}, root) > 0) {
+  if (this._compare({key: key}, root) > 0) {
     if (!root.right) {
       return false;
     }
@@ -238,7 +238,7 @@ AvlTree.prototype._contains = function (key, root) {
  * @return {Object} The minimum key in the tree.
  */
 AvlTree.prototype.findMinimum = function () {
-  return minValueNode(this.root).key;
+  return minValueNode(this._root).key;
 };
 
 /**
@@ -259,7 +259,7 @@ function minValueNode(root) {
  * @return The maximum key in the tree.
  */
 AvlTree.prototype.findMaximum = function () {
-  return maxValueNode(this.root).key;
+  return maxValueNode(this._root).key;
 };
 
 /**
@@ -276,14 +276,13 @@ function maxValueNode(root) {
   return current;
 }
 
-// TODO: Improve name
-AvlTree.prototype.getSize = function () {
-  return this.size;
+AvlTree.prototype.size = function () {
+  return this._size;
 };
 
 // TODO: Should this be supported?
 AvlTree.prototype.isEmpty = function () {
-  return this.size === 0;
+  return this._size === 0;
 };
 
 /**

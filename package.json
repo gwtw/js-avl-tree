@@ -31,6 +31,9 @@
     "xo": "^0.15.0"
   },
   "xo": {
-    "space": 2
+    "space": 2,
+    "rules": {
+      "no-lonely-if": "off"
+    }
   }
 }
