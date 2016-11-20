@@ -180,7 +180,6 @@ AvlTree.prototype._delete = function (key, root) {
         getBalanceState(root.left) === BalanceState.SLIGHTLY_UNBALANCED_RIGHT) {
       return root.rotateLeft();
     }
-    // TODO: Confirm this case is correct (it's inconsistent with left right)
     // Right left case
     if (getBalanceState(root.left) === BalanceState.SLIGHTLY_UNBALANCED_LEFT) {
       root.right = root.right.rotateRight();
