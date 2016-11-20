@@ -69,7 +69,7 @@ AvlTree.prototype._insert = function (key, root) {
   }
 
   if (this._compare({key: key}, root) < 0) {
-    root.left = this.insert(key, root.left);
+    root.left = this._insert(key, root.left);
   } else if (this._compare({key: key}, root) > 0) {
     root.right = this._insert(key, root.right);
   } else {
