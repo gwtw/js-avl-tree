@@ -223,14 +223,10 @@ AvlTree.prototype._contains = function (key, root) {
     return this._contains(key, root.left);
   }
 
-  if (this._compare({key: key}, root) > 0) {
-    if (!root.right) {
-      return false;
-    }
-    return this._contains(key, root.right);
+  if (!root.right) {
+    return false;
   }
-
-  return false;
+  return this._contains(key, root.right);
 };
 
 /**
