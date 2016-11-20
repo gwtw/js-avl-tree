@@ -85,22 +85,22 @@ AvlTree.prototype._insert = function (key, root) {
   if (balanceState === BalanceState.UNBALANCED_LEFT) {
     if (this._compare({key: key}, root.left) < 0) {
       // Left left case
-      root = root.rightRotate();
+      root = root.rotateRight();
     } else {
       // Left right case
-      root.left = root.left.leftRotate();
-      return root.rightRotate();
+      root.left = root.left.rotateLeft();
+      return root.rotateRight();
     }
   }
 
   if (balanceState === BalanceState.UNBALANCED_RIGHT) {
     if (this._compare({key: key}, root.right) > 0) {
       // Right right case
-      root = root.leftRotate();
+      root = root.rotateLeft();
     } else {
       // Right left case
-      root.right = root.right.rightRotate();
-      return root.leftRotate();
+      root.right = root.right.rotateRight();
+      return root.rotateLeft();
     }
   }
 
@@ -165,12 +165,12 @@ AvlTree.prototype._delete = function (key, root) {
     // Left left case
     if (getBalanceState(root.left) === BalanceState.BALANCED ||
         getBalanceState(root.left) === BalanceState.SLIGHTLY_UNBALANCED_LEFT) {
-      return root.rightRotate();
+      return root.rotateRight();
     }
     // Left right case
     if (getBalanceState(root.left) === BalanceState.SLIGHTLY_UNBALANCED_RIGHT) {
-      root.left = root.left.leftRotate();
-      return root.rightRotate();
+      root.left = root.left.rotateLeft();
+      return root.rotateRight();
     }
   }
 
@@ -178,13 +178,13 @@ AvlTree.prototype._delete = function (key, root) {
   if (balanceState === BalanceState.UNBALANCED_RIGHT) {
     if (getBalanceState(root.left) === BalanceState.BALANCED ||
         getBalanceState(root.left) === BalanceState.SLIGHTLY_UNBALANCED_RIGHT) {
-      return root.leftRotate();
+      return root.rotateLeft();
     }
     // TODO: Confirm this case is correct (it's inconsistent with left right)
     // Right left case
     if (getBalanceState(root.left) === BalanceState.SLIGHTLY_UNBALANCED_LEFT) {
-      root.right = root.right.rightRotate();
-      return root.leftRotate();
+      root.right = root.right.rotateRight();
+      return root.rotateLeft();
     }
   }
 

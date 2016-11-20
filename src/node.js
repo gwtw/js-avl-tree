@@ -5,8 +5,6 @@
  */
 'use strict';
 
-var NULL_NODE_HEIGHT = -1;
-
 /**
  * Creates a new AVL Tree node..
  *
@@ -30,7 +28,7 @@ var Node = function (key) {
  *
  * @return {Node} The root of the sub-tree; the node where this node used to be.
  */
-Node.prototype.rightRotate = function () {
+Node.prototype.rotateRight = function () {
   var other = this.left;
   this.left = other.right;
   other.right = this;
@@ -50,7 +48,7 @@ Node.prototype.rightRotate = function () {
  *
  * @return {Node} The root of the sub-tree; the node where this node used to be.
  */
-Node.prototype.leftRotate = function () {
+Node.prototype.rotateLeft = function () {
   var other = this.right;
   this.right = other.left;
   other.left = this;
@@ -60,27 +58,27 @@ Node.prototype.leftRotate = function () {
 };
 
 /**
- * Convenience function to get the height of the left child of the node, returning
- * {@link NULL_NODE_HEIGHT} if the node is null.
+ * Convenience function to get the height of the left child of the node, returning -1 if the node
+ * is null.
  *
- * @return {number} The height of the left child, or {@link NULL_NODE_HEIGHT} if it doesn't exist.
+ * @return {number} The height of the left child, or -1 if it doesn't exist.
  */
 Node.prototype.getLeftHeight = function () {
   if (!this.left) {
-    return NULL_NODE_HEIGHT;
+    return -1;
   }
   return this.left.height;
 };
 
 /**
- * Convenience function to get the height of the right child of the node, returning
- * {@link NULL_NODE_HEIGHT} if the node is null.
+ * Convenience function to get the height of the right child of the node, returning -1 if the node
+ * is null.
  *
- * @return {number} The height of the right child, or {@link NULL_NODE_HEIGHT} if it doesn't exist.
+ * @return {number} The height of the right child, or -1 if it doesn't exist.
  */
 Node.prototype.getRightHeight = function () {
   if (!this.right) {
-    return NULL_NODE_HEIGHT;
+    return -1;
   }
   return this.right.height;
 };
