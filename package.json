@@ -16,7 +16,7 @@
     "data structure",
     "tree"
   ],
-  "main": "index.js",
+  "main": "src/avl-tree.js",
   "author": "Daniel Imms (http://www.growingwiththeweb.com)",
   "license": "MIT",
   "bugs": {
