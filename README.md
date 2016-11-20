@@ -19,7 +19,6 @@ A JavaScript implementation of the [AVL tree](http://www.growingwiththeweb.com/d
 | isEmpty     | Θ(1)       |
 | size        | Θ(1)       |
 
-\* amortized
 ## API
 
 ### AvlTree
@@ -28,7 +27,7 @@ Creates a new AVL Tree.
 
 **Parameters**
 
--   `customCompare`
+-   `customCompare` **function** An optional custom compare function.
 
 #### contains
 

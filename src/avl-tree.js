@@ -20,6 +20,8 @@ var BalanceState = {
 
 /**
  * Creates a new AVL Tree.
+ *
+ * @param {function} customCompare An optional custom compare function.
  */
 var AvlTree = function (customCompare) {
   this._root = null;
@@ -31,7 +33,7 @@ var AvlTree = function (customCompare) {
 };
 
 /**
- * Compares two nodes with each other.
+ * Compares two keys with each other.
  *
  * @private
  * @param {Object} a The first key to compare.
@@ -39,10 +41,10 @@ var AvlTree = function (customCompare) {
  * @return {number} -1, 0 or 1 if a < b, a == b or a > b respectively.
  */
 AvlTree.prototype._compare = function (a, b) {
-  if (a.key > b.key) {
+  if (a > b) {
     return 1;
   }
-  if (a.key < b.key) {
+  if (a < b) {
     return -1;
   }
   return 0;
@@ -71,9 +73,9 @@ AvlTree.prototype._insert = function (key, root) {
     return new Node(key);
   }
 
-  if (this._compare({key: key}, root) < 0) {
+  if (this._compare(key, root.key) < 0) {
     root.left = this._insert(key, root.left);
-  } else if (this._compare({key: key}, root) > 0) {
+  } else if (this._compare(key, root.key) > 0) {
     root.right = this._insert(key, root.right);
   } else {
     // It's a duplicate so insertion failed, decrement size to make up for it
@@ -86,7 +88,7 @@ AvlTree.prototype._insert = function (key, root) {
   var balanceState = getBalanceState(root);
 
   if (balanceState === BalanceState.UNBALANCED_LEFT) {
-    if (this._compare({key: key}, root.left) < 0) {
+    if (this._compare(key, root.left.key) < 0) {
       // Left left case
       root = root.rotateRight();
     } else {
@@ -97,7 +99,7 @@ AvlTree.prototype._insert = function (key, root) {
   }
 
   if (balanceState === BalanceState.UNBALANCED_RIGHT) {
-    if (this._compare({key: key}, root.right) > 0) {
+    if (this._compare(key, root.right.key) > 0) {
       // Right right case
       root = root.rotateLeft();
     } else {
@@ -134,10 +136,10 @@ AvlTree.prototype._delete = function (key, root) {
     return root;
   }
 
-  if (this._compare({key: key}, root) < 0) {
+  if (this._compare(key, root.key) < 0) {
     // The key to be deleted is in the left sub-tree
     root.left = this._delete(key, root.left);
-  } else if (this._compare({key: key}, root) > 0) {
+  } else if (this._compare(key, root.key) > 0) {
     // The key to be deleted is in the right sub-tree
     root.right = this._delete(key, root.right);
   } else {
@@ -219,7 +221,7 @@ AvlTree.prototype._contains = function (key, root) {
     return true;
   }
 
-  if (this._compare({key: key}, root) < 0) {
+  if (this._compare(key, root.key) < 0) {
     if (!root.left) {
       return false;
     }
