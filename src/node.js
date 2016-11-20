@@ -32,8 +32,8 @@ Node.prototype.rotateRight = function () {
   var other = this.left;
   this.left = other.right;
   other.right = this;
-  this.height = Math.max(this.getLeftHeight(), this.getRightHeight()) + 1;
-  other.height = Math.max(other.getLeftHeight(), this.height) + 1;
+  this.height = Math.max(this.leftHeight(), this.rightHeight()) + 1;
+  other.height = Math.max(other.leftHeight(), this.height) + 1;
   return other;
 };
 
@@ -52,8 +52,8 @@ Node.prototype.rotateLeft = function () {
   var other = this.right;
   this.right = other.left;
   other.left = this;
-  this.height = Math.max(this.getLeftHeight(), this.getRightHeight()) + 1;
-  other.height = Math.max(other.getRightHeight(), this.height) + 1;
+  this.height = Math.max(this.leftHeight(), this.rightHeight()) + 1;
+  other.height = Math.max(other.rightHeight(), this.height) + 1;
   return other;
 };
 
@@ -63,7 +63,7 @@ Node.prototype.rotateLeft = function () {
  *
  * @return {number} The height of the left child, or -1 if it doesn't exist.
  */
-Node.prototype.getLeftHeight = function () {
+Node.prototype.leftHeight = function () {
   if (!this.left) {
     return -1;
   }
@@ -76,7 +76,7 @@ Node.prototype.getLeftHeight = function () {
  *
  * @return {number} The height of the right child, or -1 if it doesn't exist.
  */
-Node.prototype.getRightHeight = function () {
+Node.prototype.rightHeight = function () {
   if (!this.right) {
     return -1;
   }

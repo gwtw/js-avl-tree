@@ -79,7 +79,7 @@ AvlTree.prototype._insert = function (key, root) {
   }
 
   // Update height and rebalance tree
-  root.height = Math.max(root.getLeftHeight(), root.getRightHeight()) + 1;
+  root.height = Math.max(root.leftHeight(), root.rightHeight()) + 1;
   var balanceState = getBalanceState(root);
 
   if (balanceState === BalanceState.UNBALANCED_LEFT) {
@@ -158,7 +158,7 @@ AvlTree.prototype._delete = function (key, root) {
   }
 
   // Update height and rebalance tree
-  root.height = Math.max(root.getLeftHeight(), root.getRightHeight()) + 1;
+  root.height = Math.max(root.leftHeight(), root.rightHeight()) + 1;
   var balanceState = getBalanceState(root);
 
   if (balanceState === BalanceState.UNBALANCED_LEFT) {
@@ -295,7 +295,7 @@ function getBalanceState(node) {
   if (node === null) {
     return BalanceState.BALANCED;
   }
-  var heightDifference = node.getLeftHeight() - node.getRightHeight();
+  var heightDifference = node.leftHeight() - node.rightHeight();
   switch (heightDifference) {
     case -2: return BalanceState.UNBALANCED_RIGHT;
     case -1: return BalanceState.SLIGHTLY_UNBALANCED_RIGHT;
