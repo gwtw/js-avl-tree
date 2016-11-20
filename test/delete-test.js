@@ -1,6 +1,12 @@
 import test from 'ava';
 import Tree from '../';
 
+test('should not change the size of a tree with no root', function (t) {
+  var tree = new Tree();
+  tree.delete(1);
+  t.is(tree.size(), 0);
+});
+
 test('should delete a single key', function (t) {
   var tree = new Tree();
   tree.insert(1);
