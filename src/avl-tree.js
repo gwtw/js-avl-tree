@@ -18,6 +18,9 @@ var BalanceState = {
   UNBALANCED_LEFT: 5
 };
 
+/**
+ * Creates a new AVL Tree.
+ */
 var AvlTree = function (customCompare) {
   this._root = null;
   this._size = 0;
@@ -251,7 +254,7 @@ function minValueNode(root) {
 }
 
 /**
- * @return The maximum key in the tree.
+ * @return {Object} The maximum key in the tree.
  */
 AvlTree.prototype.findMaximum = function () {
   return maxValueNode(this._root).key;
@@ -271,17 +274,23 @@ function maxValueNode(root) {
   return current;
 }
 
+/**
+ * @return {number} The size of the tree.
+ */
 AvlTree.prototype.size = function () {
   return this._size;
 };
 
+/**
+ * @return {boolean} Whether the tree is empty.
+ */
 AvlTree.prototype.isEmpty = function () {
   return this._size === 0;
 };
 
 /**
- * Gets the balance state of a node, indicating whether the left or right sub-trees are
- * unbalanced.
+ * Gets the balance state of a node, indicating whether the left or right
+ * sub-trees are unbalanced.
  *
  * @param {Node} node The node to get the difference from.
  * @return {BalanceState} The BalanceState of the node.

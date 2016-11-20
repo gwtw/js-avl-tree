@@ -6,7 +6,7 @@
 'use strict';
 
 /**
- * Creates a new AVL Tree node..
+ * Creates a new AVL Tree node.
  *
  * @param {Object} key The key of the new node.
  */
@@ -58,8 +58,8 @@ Node.prototype.rotateLeft = function () {
 };
 
 /**
- * Convenience function to get the height of the left child of the node, returning -1 if the node
- * is null.
+ * Convenience function to get the height of the left child of the node,
+ * returning -1 if the node is null.
  *
  * @return {number} The height of the left child, or -1 if it doesn't exist.
  */
@@ -71,8 +71,8 @@ Node.prototype.leftHeight = function () {
 };
 
 /**
- * Convenience function to get the height of the right child of the node, returning -1 if the node
- * is null.
+ * Convenience function to get the height of the right child of the node,
+ * returning -1 if the node is null.
  *
  * @return {number} The height of the right child, or -1 if it doesn't exist.
  */
