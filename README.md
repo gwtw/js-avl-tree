@@ -18,6 +18,53 @@ A JavaScript implementation of the [AVL tree](http://www.growingwiththeweb.com/d
 npm install --save @tyriar/avl-tree
 ```
 
+## Usage
+
+```javascript
+// Import npm module
+var AvlTree = require('@tyriar/avl-tree');
+
+// Construct AvlTree
+var tree = new AvlTree();
+
+// Insert keys
+tree.insert(1);
+tree.insert(2);
+tree.insert(3);
+tree.insert(4);
+tree.insert(5);
+console.log('size: ' + tree.size());
+console.log('contains 2: ' + tree.contains(2));
+console.log('contains 7: ' + tree.contains(7));
+// > size: 5
+// > contains 2: true
+// > contains 7: false
+
+// Delete a key
+tree.delete(2);
+console.log('size: ' + tree.size());
+console.log('contains 2: ' + tree.contains(2));
+// > size: 4
+// > contains 2: false
+
+// Construct custom compare AvlTree
+tree = new AvlTree(function (a, b) {
+  return a.localeCompare(b);
+});
+tree.insert('a');
+tree.insert('A');
+tree.insert('b');
+tree.insert('B');
+
+// Delete the minimum key
+var minKey = tree.findMinimum();
+tree.delete(minKey);
+console.log('minKey: ' + minKey);
+console.log('new minKey: ' + tree.findMinimum());
+// > min key: 'a'
+// > new min key: 'A'
+```
+
 ## Operation time complexity
 
 | Operation   | Complexity |
