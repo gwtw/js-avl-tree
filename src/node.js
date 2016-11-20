@@ -17,7 +17,7 @@ var Node = function (key) {
   this.right = null;
   this.key = key;
   this.height = null;
-}
+};
 
 /**
  * Performs a right rotate on this node.
@@ -37,7 +37,7 @@ Node.prototype.rightRotate = function () {
   this.height = Math.max(this.getLeftHeight(), this.getRightHeight()) + 1;
   other.height = Math.max(other.getLeftHeight(), this.height) + 1;
   return other;
-}
+};
 
 /**
  * Performs a left rotate on this node.
@@ -57,7 +57,7 @@ Node.prototype.leftRotate = function () {
   this.height = Math.max(this.getLeftHeight(), this.getRightHeight()) + 1;
   other.height = Math.max(other.getRightHeight(), this.height) + 1;
   return other;
-}
+};
 
 /**
  * Convenience function to get the height of the left child of the node, returning
@@ -69,8 +69,8 @@ Node.prototype.getLeftHeight = function () {
   if (!this.left) {
     return NULL_NODE_HEIGHT;
   }
-  return left.height;
-}
+  return this.left.height;
+};
 
 /**
  * Convenience function to get the height of the right child of the node, returning
@@ -82,7 +82,7 @@ Node.prototype.getRightHeight = function () {
   if (!this.right) {
     return NULL_NODE_HEIGHT;
   }
-  return right.height;
-}
+  return this.right.height;
+};
 
 module.exports = Node;

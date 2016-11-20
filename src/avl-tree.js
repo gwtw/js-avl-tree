@@ -11,12 +11,12 @@ var Node = require('./node');
  * Represents how balanced a node's left and right children are.
  */
 var BalanceState = {
-    UNBALANCED_RIGHT: 1,
-    SLIGHTLY_UNBALANCED_RIGHT: 2,
-    BALANCED: 3,
-    SLIGHTLY_UNBALANCED_LEFT: 4,
-    UNBALANCED_LEFT: 5
-}
+  UNBALANCED_RIGHT: 1,
+  SLIGHTLY_UNBALANCED_RIGHT: 2,
+  BALANCED: 3,
+  SLIGHTLY_UNBALANCED_LEFT: 4,
+  UNBALANCED_LEFT: 5
+};
 
 var AvlTree = function (customCompare) {
   this.root = undefined;
@@ -65,16 +65,16 @@ AvlTree.prototype.insert = function (key) {
 AvlTree.prototype._insert = function (key, root) {
   // Perform regular BST insertion
   if (typeof root === 'undefined') {
-      return new Node(key);
+    return new Node(key);
   }
 
-  if (this.compare({ key: key }, root) < 0) {
+  if (this.compare({key: key}, root) < 0) {
     root.left = this.insert(key, root.left);
-  } else if (this.compare({ key: key }, root) > 0) {
+  } else if (this.compare({key: key}, root) > 0) {
     root.right = this._insert(key, root.right);
   } else {
     // It's a duplicate so insertion failed, decrement size to make up for it
-    size--;
+    this.size--;
     return root;
   }
 
@@ -83,7 +83,7 @@ AvlTree.prototype._insert = function (key, root) {
   var balanceState = getBalanceState(root);
 
   if (balanceState === BalanceState.UNBALANCED_LEFT) {
-    if (this.compare({ key: key }, root.left) < 0) {
+    if (this.compare({key: key}, root.left) < 0) {
       // Left left case
       root = root.rightRotate();
     } else {
@@ -94,7 +94,7 @@ AvlTree.prototype._insert = function (key, root) {
   }
 
   if (balanceState === BalanceState.UNBALANCED_RIGHT) {
-    if (this.compare({ key: key }, root.right) > 0) {
+    if (this.compare({key: key}, root.right) > 0) {
       // Right right case
       root = root.leftRotate();
     } else {
@@ -115,7 +115,7 @@ AvlTree.prototype._insert = function (key, root) {
 AvlTree.prototype.delete = function (key) {
   this.root = this._delete(key, this.root);
   this.size--;
-}
+};
 
 /**
  * Deletes a node with a specific key from the tree.
@@ -131,10 +131,10 @@ AvlTree.prototype._delete = function (key, root) {
     return root;
   }
 
-  if (this.compare({ key: key }, root) < 0) {
+  if (this.compare({key: key}, root) < 0) {
     // The key to be deleted is in the left sub-tree
     root.left = this._delete(key, root.left);
-  } else if (this.compare({ key: key }, root) > 0) {
+  } else if (this.compare({key: key}, root) > 0) {
     // The key to be deleted is in the right sub-tree
     root.right = this._delete(key, root.right);
   } else {
@@ -147,7 +147,7 @@ AvlTree.prototype._delete = function (key, root) {
       root = root.getLeft();
     } else {
       // Node has 2 children, get the in-order successor
-      inOrderSuccessor = this._minValueNode(root.right);
+      var inOrderSuccessor = this._minValueNode(root.right);
       root.key = inOrderSuccessor.key;
       root.right = this._delete(inOrderSuccessor.key, root.right);
     }
@@ -189,7 +189,7 @@ AvlTree.prototype._delete = function (key, root) {
   }
 
   return root;
-}
+};
 
 /**
  * Gets whether a node with a specific key is within the tree.
@@ -203,7 +203,7 @@ AvlTree.prototype.contains = function (key) {
   }
 
   return this._contains(key, this.root);
-}
+};
 
 /**
  * Gets whether a node with a specific key is within the tree.
@@ -217,14 +217,14 @@ AvlTree.prototype._contains = function (key, root) {
     return true;
   }
 
-  if (this.compare({ key: key }, root) < 0) {
+  if (this.compare({key: key}, root) < 0) {
     if (!root.left) {
       return false;
     }
     return this._contains(key, root.left);
   }
 
-  if (this.compare({ key: key }, root) > 0) {
+  if (this.compare({key: key}, root) > 0) {
     if (!root.right) {
       return false;
     }
@@ -232,14 +232,14 @@ AvlTree.prototype._contains = function (key, root) {
   }
 
   return false;
-}
+};
 
 /**
  * @return {Object} The minimum key in the tree.
  */
 AvlTree.prototype.findMinimum = function () {
   return minValueNode(this.root).key;
-}
+};
 
 /**
  * Gets the minimum value node, rooted in a particular node.
@@ -260,7 +260,7 @@ function minValueNode(root) {
  */
 AvlTree.prototype.findMaximum = function () {
   return maxValueNode(this.root).key;
-}
+};
 
 /**
  * Gets the maximum value node, rooted in a particular node.
@@ -278,13 +278,13 @@ function maxValueNode(root) {
 
 // TODO: Improve name
 AvlTree.prototype.getSize = function () {
-  this.size;
-}
+  return this.size;
+};
 
 // TODO: Should this be supported?
 AvlTree.prototype.isEmpty = function () {
   return this.size === 0;
-}
+};
 
 /**
  * Gets the balance state of a node, indicating whether the left or right sub-trees are
@@ -303,8 +303,8 @@ function getBalanceState(node) {
     case -1: return BalanceState.SLIGHTLY_UNBALANCED_RIGHT;
     case 1: return BalanceState.SLIGHTLY_UNBALANCED_LEFT;
     case 2: return BalanceState.UNBALANCED_LEFT;
+    default: return BalanceState.BALANCED;
   }
-  return BalanceState.BALANCED;
 }
 
 module.exports = AvlTree;
