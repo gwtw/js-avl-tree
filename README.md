@@ -7,6 +7,19 @@ A JavaScript implementation of the [AVL tree](http://www.growingwiththeweb.com/d
 
 ![](http://www.growingwiththeweb.com/images/data-structures/avl-tree/avl-tree.svg)
 
+## Operation time complexity
+
+| Operation   | Complexity |
+| ----------- | ---------- |
+| contains    | Θ(log n)   |
+| delete      | Θ(log n)   |
+| findMaximum | Θ(log n)   |
+| findMinimum | Θ(log n)   |
+| insert      | Θ(log n)   |
+| isEmpty     | Θ(1)       |
+| size        | Θ(1)       |
+
+\* amortized
 ## API
 
 ### AvlTree
