@@ -6,9 +6,3 @@
 A JavaScript implementation of the [AVL tree](http://www.growingwiththeweb.com/data-structures/avl-tree/overview/) data structure.
 
 ![](http://www.growingwiththeweb.com/images/data-structures/avl-tree/avl-tree.svg)
-
-## Install
-
-```bash
-npm install --save @tyriar/binomial-heap
-```
