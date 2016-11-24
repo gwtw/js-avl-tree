@@ -10,12 +10,14 @@
  *
  * @private
  * @param {Object} key The key of the new node.
+ * @param {Object} value The value of the new node.
  */
-var Node = function (key) {
+var Node = function (key, value) {
   this.left = null;
   this.right = null;
-  this.key = key;
   this.height = null;
+  this.key = key;
+  this.value = value;
 };
 
 /**

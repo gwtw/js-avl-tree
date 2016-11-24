@@ -113,6 +113,16 @@ Returns **Object** The maximum key in the tree.
 
 Returns **Object** The minimum key in the tree.
 
+#### get
+
+Gets the value of a node within the tree with a specific key.
+
+**Parameters**
+
+-   `key` **Object** The key being searched for.
+
+Returns **Object** The value of the node or null if it doesn't exist.
+
 #### insert
 
 Inserts a new node with a specific key into the tree.
@@ -120,6 +130,7 @@ Inserts a new node with a specific key into the tree.
 **Parameters**
 
 -   `key` **Object** The key being inserted.
+-   `value` **Object** The value being inserted.
 
 #### isEmpty
 

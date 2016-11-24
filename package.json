@@ -33,6 +33,7 @@
   "xo": {
     "space": 2,
     "rules": {
+      "no-implicit-coercion": "off",
       "no-lonely-if": "off",
       "no-use-before-define": "off"
     }

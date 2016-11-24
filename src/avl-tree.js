@@ -43,9 +43,10 @@ AvlTree.prototype._compare = function (a, b) {
  * Inserts a new node with a specific key into the tree.
  *
  * @param {Object} key The key being inserted.
+ * @param {Object} value The value being inserted.
  */
-AvlTree.prototype.insert = function (key) {
-  this._root = this._insert(key, this._root);
+AvlTree.prototype.insert = function (key, value) {
+  this._root = this._insert(key, value, this._root);
   this._size++;
 };
 
@@ -57,16 +58,16 @@ AvlTree.prototype.insert = function (key) {
  * @param {Node} root The root of the tree to insert in.
  * @return {Node} The new tree root.
  */
-AvlTree.prototype._insert = function (key, root) {
+AvlTree.prototype._insert = function (key, value, root) {
   // Perform regular BST insertion
   if (root === null) {
-    return new Node(key);
+    return new Node(key, value);
   }
 
   if (this._compare(key, root.key) < 0) {
-    root.left = this._insert(key, root.left);
+    root.left = this._insert(key, value, root.left);
   } else if (this._compare(key, root.key) > 0) {
-    root.right = this._insert(key, root.right);
+    root.right = this._insert(key, value, root.right);
   } else {
     // It's a duplicate so insertion failed, decrement size to make up for it
     this._size--;
@@ -187,6 +188,46 @@ AvlTree.prototype._delete = function (key, root) {
 };
 
 /**
+ * Gets the value of a node within the tree with a specific key.
+ *
+ * @param {Object} key The key being searched for.
+ * @return {Object} The value of the node or null if it doesn't exist.
+ */
+AvlTree.prototype.get = function (key) {
+  if (this._root === null) {
+    return null;
+  }
+
+  return this._get(key, this._root).value;
+};
+
+/**
+ * Gets the value of a node within the tree with a specific key.
+ *
+ * @private
+ * @param {Object} key The key being searched for.
+ * @param {Node} root The root of the tree to search in.
+ * @return {Object} The value of the node or null if it doesn't exist.
+ */
+AvlTree.prototype._get = function (key, root) {
+  if (key === root.key) {
+    return root;
+  }
+
+  if (this._compare(key, root.key) < 0) {
+    if (!root.left) {
+      return null;
+    }
+    return this._get(key, root.left);
+  }
+
+  if (!root.right) {
+    return null;
+  }
+  return this._get(key, root.right);
+};
+
+/**
  * Gets whether a node with a specific key is within the tree.
  *
  * @param {Object} key The key being searched for.
@@ -197,33 +238,7 @@ AvlTree.prototype.contains = function (key) {
     return false;
   }
 
-  return this._contains(key, this._root);
-};
-
-/**
- * Gets whether a node with a specific key is within the tree.
- *
- * @private
- * @param {Object} key The key being searched for.
- * @param {Node} root The root of the tree to search in.
- * @return {boolean} Whether a node with the key exists.
- */
-AvlTree.prototype._contains = function (key, root) {
-  if (key === root.key) {
-    return true;
-  }
-
-  if (this._compare(key, root.key) < 0) {
-    if (!root.left) {
-      return false;
-    }
-    return this._contains(key, root.left);
-  }
-
-  if (!root.right) {
-    return false;
-  }
-  return this._contains(key, root.right);
+  return !!this._get(key, this._root);
 };
 
 /**
