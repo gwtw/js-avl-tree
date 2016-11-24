@@ -69,11 +69,12 @@ console.log('new minKey: ' + tree.findMinimum());
 
 | Operation   | Complexity |
 | ----------- | ---------- |
-| contains    | Θ(log n)   |
-| delete      | Θ(log n)   |
-| findMaximum | Θ(log n)   |
-| findMinimum | Θ(log n)   |
-| insert      | Θ(log n)   |
+| contains    | O(log n)   |
+| delete      | O(log n)   |
+| findMaximum | O(log n)   |
+| findMinimum | O(log n)   |
+| get         | O(log n)   |
+| insert      | O(log n)   |
 | isEmpty     | Θ(1)       |
 | size        | Θ(1)       |
 
