@@ -8,19 +8,6 @@
 var Node = require('./node');
 
 /**
- * Represents how balanced a node's left and right children are.
- *
- * @private
- */
-var BalanceState = {
-  UNBALANCED_RIGHT: 1,
-  SLIGHTLY_UNBALANCED_RIGHT: 2,
-  BALANCED: 3,
-  SLIGHTLY_UNBALANCED_LEFT: 4,
-  UNBALANCED_LEFT: 5
-};
-
-/**
  * Creates a new AVL Tree.
  *
  * @param {function} customCompare An optional custom compare function.
@@ -295,6 +282,19 @@ AvlTree.prototype.size = function () {
  */
 AvlTree.prototype.isEmpty = function () {
   return this._size === 0;
+};
+
+/**
+ * Represents how balanced a node's left and right children are.
+ *
+ * @private
+ */
+var BalanceState = {
+  UNBALANCED_RIGHT: 1,
+  SLIGHTLY_UNBALANCED_RIGHT: 2,
+  BALANCED: 3,
+  SLIGHTLY_UNBALANCED_LEFT: 4,
+  UNBALANCED_LEFT: 5
 };
 
 /**
