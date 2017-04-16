@@ -28,14 +28,17 @@
     "coveralls": "^2.11.4",
     "documentation-readme": "^2.1.0",
     "nyc": "^3.2.2",
-    "xo": "^0.15.0"
+    "xo": "^0.18.1"
   },
   "xo": {
     "space": 2,
     "rules": {
+      "capitalized-comments": "off",
       "no-implicit-coercion": "off",
       "no-lonely-if": "off",
-      "no-use-before-define": "off"
+      "no-use-before-define": "off",
+      "no-var": "off",
+      "prefer-arrow-callback": "off"
     }
   }
 }
