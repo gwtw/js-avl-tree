@@ -146,7 +146,7 @@ AvlTree.prototype._delete = function (key, root) {
       // Node has 2 children, get the in-order successor
       var inOrderSuccessor = minValueNode(root.right);
       root.key = inOrderSuccessor.key;
-      root.value = inOrderSuccessor.value;  //fix assign value to root
+      root.value = inOrderSuccessor.value;
       root.right = this._delete(inOrderSuccessor.key, root.right);
     }
   }
