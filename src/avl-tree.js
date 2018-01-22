@@ -209,7 +209,7 @@ AvlTree.prototype.get = function (key) {
  * @private
  * @param {Object} key The key being searched for.
  * @param {Node} root The root of the tree to search in.
- * @return {Object} The value of the node or null if it doesn't exist.
+ * @return {Object} The node or null if it doesn't exist.
  */
 AvlTree.prototype._get = function (key, root) {
   if (key === root.key) {
