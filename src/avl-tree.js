@@ -55,6 +55,7 @@ AvlTree.prototype.insert = function (key, value) {
  *
  * @private
  * @param {Object} key The key being inserted.
+ * @param {Object} value The value being inserted.
  * @param {Node} root The root of the tree to insert in.
  * @return {Node} The new tree root.
  */
