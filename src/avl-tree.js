@@ -212,11 +212,13 @@ AvlTree.prototype.get = function (key) {
  * @return {Object} The node or null if it doesn't exist.
  */
 AvlTree.prototype._get = function (key, root) {
-  if (this._compare(key, root.key) === 0) {
+  var result = this._compare(key, root.key);
+
+  if (result === 0) {
     return root;
   }
 
-  if (this._compare(key, root.key) < 0) {
+  if (result < 0) {
     if (!root.left) {
       return null;
     }
