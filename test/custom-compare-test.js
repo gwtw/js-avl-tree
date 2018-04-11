@@ -17,3 +17,12 @@ test('should function correctly given a non-reverse customCompare', function (t)
   t.is(tree._root.left, null);
   t.is(tree._root.right.key, 1);
 });
+
+test('should work when the key is a complex object', function (t) {
+  const tree = new Tree((a, b) => {
+    return a.innerKey - b.innerKey;
+  });
+  tree.insert({innerKey: 1});
+  t.true(tree.contains({innerKey: 1}));
+  t.false(tree.contains({innerKey: 2}));
+});
