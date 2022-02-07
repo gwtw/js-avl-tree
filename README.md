@@ -5,6 +5,9 @@
 
 A JavaScript implementation of the [AVL tree](http://www.growingwiththeweb.com/data-structures/avl-tree/overview/) data structure.
 
+Note that the primary purpose of this library is education, but it should work in a production environment as well. It's certainly not as performant as it could be as it optimises for readability, abstraction and safety over raw performance.
+For a typescript version, please check out [https://github.com/gwtw/ts-avl-tree](https://github.com/gwtw/ts-avl-tree).
+
 ![](http://www.growingwiththeweb.com/images/data-structures/avl-tree/avl-tree.svg)
 
 ## Features
@@ -22,7 +25,7 @@ npm install --save @tyriar/avl-tree
 
 ```javascript
 // Import npm module
-var AvlTree = require('@tyriar/avl-tree');
+var AvlTree = require('@tyriar/avl-tree').AvlTree;
 
 // Construct AvlTree
 var tree = new AvlTree();
@@ -33,7 +36,7 @@ tree.insert(2);
 tree.insert(3);
 tree.insert(4);
 tree.insert(5);
-console.log('size: ' + tree.size());
+console.log('size: ' + tree.size);
 console.log('contains 2: ' + tree.contains(2));
 console.log('contains 7: ' + tree.contains(7));
 // > size: 5
@@ -42,7 +45,7 @@ console.log('contains 7: ' + tree.contains(7));
 
 // Delete a key
 tree.delete(2);
-console.log('size: ' + tree.size());
+console.log('size: ' + tree.size);
 console.log('contains 2: ' + tree.contains(2));
 // > size: 4
 // > contains 2: false
